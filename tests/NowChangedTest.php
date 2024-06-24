@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Blumilk\LaravelHeatmap\HeatmapBuilder;
 use Blumilk\LaravelHeatmap\Tile;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class NowChangedTest extends TestCase
@@ -13,7 +14,7 @@ class NowChangedTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $result = $builder->build($this->getData());
 
@@ -28,7 +29,7 @@ class NowChangedTest extends TestCase
         $builder = new HeatmapBuilder();
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-20"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
 
         $result = $builder->build($this->getData());

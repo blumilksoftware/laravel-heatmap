@@ -6,6 +6,7 @@ use Blumilk\LaravelHeatmap\Decorators\TailwindDecorator;
 use Blumilk\LaravelHeatmap\HeatmapBuilder;
 use Blumilk\LaravelHeatmap\Tile;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class DecoratorTest extends TestCase
@@ -33,7 +34,7 @@ class DecoratorTest extends TestCase
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-18"),
             decorator: new TailwindDecorator("green"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
 
         $result = $builder->build($data);

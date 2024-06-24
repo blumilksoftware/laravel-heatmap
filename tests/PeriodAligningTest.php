@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Blumilk\LaravelHeatmap\HeatmapBuilder;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class PeriodAligningTest extends TestCase
@@ -12,7 +13,7 @@ class PeriodAligningTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastMonth()->alignedToStartOfPeriod();
 
@@ -28,7 +29,7 @@ class PeriodAligningTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastMonth()->alignedToStartOfPeriod()->alignedToEndOfPeriod();
 
@@ -44,7 +45,7 @@ class PeriodAligningTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forNumberOfTiles(4)->alignedToStartOfPeriod();
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Blumilk\LaravelHeatmap\HeatmapBuilder;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class PeriodActionsTest extends TestCase
@@ -12,7 +13,7 @@ class PeriodActionsTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastMonth();
 
@@ -28,7 +29,7 @@ class PeriodActionsTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-03-01 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastMonth();
 
@@ -44,7 +45,7 @@ class PeriodActionsTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastYear();
 
@@ -60,7 +61,7 @@ class PeriodActionsTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2020-05-01 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastYear();
 
@@ -76,7 +77,7 @@ class PeriodActionsTest extends TestCase
     {
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2020-03-01 00:00:00"),
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forNumberOfTiles(100);
 

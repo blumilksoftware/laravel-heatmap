@@ -6,6 +6,7 @@ use Blumilk\LaravelHeatmap\HeatmapBuilder;
 use Blumilk\LaravelHeatmap\PeriodInterval;
 use Blumilk\LaravelHeatmap\Tile;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class PeriodIntervalTest extends TestCase
@@ -15,7 +16,7 @@ class PeriodIntervalTest extends TestCase
         $builder = new HeatmapBuilder(
             now: Carbon::parse("2022-11-19"),
             periodInterval: PeriodInterval::Monthly,
-            timezone: new \Carbon\CarbonTimeZone('1')
+            timezone: new CarbonTimeZone("1"),
         );
         $builder->forLastYear();
 

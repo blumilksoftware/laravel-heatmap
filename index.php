@@ -40,7 +40,6 @@
             decorator: new TailwindDecorator("red"),
             alignedToStartOfPeriod: true,
             alignedToEndOfPeriod: true,
-            //timezone: new \Carbon\CarbonTimeZone('+2'),
         );
 
         $heatmap = $heatmapBuilder->build($data);

@@ -5,7 +5,8 @@
   "require": {
     "php": "^8.2",
     "nesbot/carbon": "^3.5",
-    "illuminate/support": "^11.11"
+    "illuminate/support": "^11.11",
+    "blumilksoftware/heatmap": "dev-main"
   },
   "require-dev": {
     "blumilksoftware/codestyle": "^3.2",
@@ -22,6 +23,12 @@
       ]
     }
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/blumilksoftware/heatmap.git"
+    }
+  ],
   "license": "MIT",
   "autoload": {
     "psr-4": {
@@ -37,5 +44,7 @@
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
     "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
     "test": "./vendor/bin/phpunit tests --colors always"
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

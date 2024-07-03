@@ -14,9 +14,9 @@
 
         require_once __DIR__ . "/vendor/autoload.php";
 
-        use Blumilk\HeatmapBuilder\Decorators\TailwindDecorator;
-        use Blumilk\HeatmapBuilder\HeatmapBuilder;
-        use Blumilk\HeatmapBuilder\PeriodInterval;
+        use Blumilk\Heatmap\Decorators\TailwindDecorator;
+        use Blumilk\Heatmap\HeatmapBuilder;
+        use Blumilk\Heatmap\PeriodInterval;
         use Carbon\Carbon;
         use Carbon\CarbonPeriod;
 
@@ -39,7 +39,7 @@
             period: CarbonPeriod::create($startOfMonth, '1 day', $endOfMonth),
             decorator: new TailwindDecorator("red"),
             alignedToStartOfPeriod: true,
-            alignedToEndOfPeriod: true,
+            alignedToEndOfPeriod: false,
         //timezone: new \Carbon\CarbonTimeZone('+2'),
         );
 

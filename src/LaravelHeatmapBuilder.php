@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace Blumilk\LaravelHeatmap;
 
+use ArrayAccess;
 use Blumilk\Heatmap\Contracts\TimeGroupable;
 use Blumilk\Heatmap\HeatmapBuilder;
-
-use ArrayAccess;
 use Blumilk\Heatmap\PeriodInterval;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class LaravelHeatmapBuilder extends HeatmapBuilder
 {
     /**
      * @param string|Builder|Collection $data
-     * @param string $arrayAccessIndex
      */
     public function build($data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
     {
@@ -31,7 +29,7 @@ class LaravelHeatmapBuilder extends HeatmapBuilder
         }
 
         if (!$data instanceof Collection) {
-            throw new \InvalidArgumentException('Data must be a class name, query builder, or collection of Eloquent models.');
+            throw new \InvalidArgumentException("Data must be a class name, query builder, or collection of Eloquent models.");
         }
 
         return parent::build($data);

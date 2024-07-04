@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 
 class LaravelHeatmapBuilder extends HeatmapBuilder
 {
@@ -29,7 +30,7 @@ class LaravelHeatmapBuilder extends HeatmapBuilder
         }
 
         if (!$data instanceof Collection) {
-            throw new \InvalidArgumentException("Data must be a class name, query builder, or collection of Eloquent models.");
+            throw new InvalidArgumentException("Data must be a class name, query builder, or collection of Eloquent models.");
         }
 
         return parent::build($data);
@@ -52,12 +53,12 @@ class LaravelHeatmapBuilder extends HeatmapBuilder
             $date = Carbon::parse($item->getTimeGroupableIndicator());
         } elseif ($item instanceof Model) {
             if (!isset($item->{$this->arrayAccessIndex})) {
-                throw new \InvalidArgumentException("The property '{$this->arrayAccessIndex}' does not exist on the given model.");
+                throw new InvalidArgumentException("The property '{$this->arrayAccessIndex}' does not exist on the given model.");
             }
             $date = Carbon::parse($item->{$this->arrayAccessIndex});
         } else {
             if (!isset($item[$this->arrayAccessIndex])) {
-                throw new \InvalidArgumentException("The key '{$this->arrayAccessIndex}' does not exist in the given array.");
+                throw new InvalidArgumentException("The key '{$this->arrayAccessIndex}' does not exist in the given array.");
             }
             $date = Carbon::parse($item[$this->arrayAccessIndex]);
         }

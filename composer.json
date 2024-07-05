@@ -6,7 +6,8 @@
     "php": "^8.2",
     "nesbot/carbon": "^3.5",
     "illuminate/support": "^11.11",
-    "blumilksoftware/heatmap": "0.0.1"
+    "illuminate/database": "^11.12",
+    "blumilksoftware/heatmap": "0.0.2"
   },
   "require-dev": {
     "blumilksoftware/codestyle": "^3.2",

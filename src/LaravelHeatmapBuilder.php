@@ -15,11 +15,6 @@ use InvalidArgumentException;
 
 class LaravelHeatmapBuilder extends HeatmapBuilder
 {
-    /**
-     * @param Collection $data
-     * @param string $arrayAccessIndex
-     * @return array
-     */
     public function buildFromCollection(Collection $data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
     {
         $this->arrayAccessIndex = $arrayAccessIndex;
@@ -27,11 +22,6 @@ class LaravelHeatmapBuilder extends HeatmapBuilder
         return parent::build($data);
     }
 
-    /**
-     * @param array $data
-     * @param string $arrayAccessIndex
-     * @return array
-     */
     public function buildFromArray(array $data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
     {
         $this->arrayAccessIndex = $arrayAccessIndex;

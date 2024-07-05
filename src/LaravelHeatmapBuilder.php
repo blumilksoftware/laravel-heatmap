@@ -9,7 +9,6 @@ use Blumilk\Heatmap\Contracts\TimeGroupable;
 use Blumilk\Heatmap\HeatmapBuilder;
 use Blumilk\Heatmap\PeriodInterval;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
@@ -17,23 +16,28 @@ use InvalidArgumentException;
 class LaravelHeatmapBuilder extends HeatmapBuilder
 {
     /**
-     * @param string|Builder|Collection $data
+     * @param Collection $data
+     * @param string $arrayAccessIndex
+     * @return array
      */
-    public function build($data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
+    public function buildFromCollection(Collection $data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
     {
         $this->arrayAccessIndex = $arrayAccessIndex;
 
-        if (is_string($data) && class_exists($data) && is_subclass_of($data, Model::class)) {
-            $data = $data::all();
-        } elseif ($data instanceof Builder) {
-            $data = $data->get();
-        }
-
-        if (!$data instanceof Collection) {
-            throw new InvalidArgumentException("Data must be a class name, query builder, or collection of Eloquent models.");
-        }
-
         return parent::build($data);
+    }
+
+    /**
+     * @param array $data
+     * @param string $arrayAccessIndex
+     * @return array
+     */
+    public function buildFromArray(array $data, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
+    {
+        $this->arrayAccessIndex = $arrayAccessIndex;
+        $collection = collect($data);
+
+        return parent::build($collection);
     }
 
     /**

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Blumilk\LaravelHeatmap\Tests;
 
 use Blumilk\Heatmap\PeriodInterval;
+use Blumilk\Heatmap\Tile;
 use Blumilk\LaravelHeatmap\LaravelHeatmapBuilder;
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
 use Orchestra\Testbench\TestCase;
-use Blumilk\Heatmap\Tile;
 
 class LaravelHeatmapBuilderTest extends TestCase
 {
@@ -18,7 +18,7 @@ class LaravelHeatmapBuilderTest extends TestCase
         $builder = new LaravelHeatmapBuilder(
             now: Carbon::parse("2022-11-18"),
             periodInterval: PeriodInterval::Daily,
-            timezone: new CarbonTimeZone("1")
+            timezone: new CarbonTimeZone("1"),
         );
 
         $result = $builder->buildFromArray($this->getData());
@@ -34,10 +34,10 @@ class LaravelHeatmapBuilderTest extends TestCase
         $builder = new LaravelHeatmapBuilder(
             now: Carbon::parse("2022-11-18"),
             periodInterval: PeriodInterval::Daily,
-            timezone: new CarbonTimeZone("1")
+            timezone: new CarbonTimeZone("1"),
         );
 
-        $result = $builder->buildFromArray($this->getData(), 'updated_at');
+        $result = $builder->buildFromArray($this->getData(), "updated_at");
 
         $this->assertSame(
             expected: [0, 0, 0, 0, 0, 2, 0, 0],
@@ -50,7 +50,7 @@ class LaravelHeatmapBuilderTest extends TestCase
         $builder = new LaravelHeatmapBuilder(
             now: Carbon::parse("2022-11-18"),
             periodInterval: PeriodInterval::Daily,
-            timezone: new CarbonTimeZone("1")
+            timezone: new CarbonTimeZone("1"),
         );
 
         $result = $builder->buildFromCollection(collect($this->getData()));
@@ -66,10 +66,10 @@ class LaravelHeatmapBuilderTest extends TestCase
         $builder = new LaravelHeatmapBuilder(
             now: Carbon::parse("2022-11-18"),
             periodInterval: PeriodInterval::Daily,
-            timezone: new CarbonTimeZone("1")
+            timezone: new CarbonTimeZone("1"),
         );
 
-        $result = $builder->buildFromCollection(collect($this->getData()), 'updated_at');
+        $result = $builder->buildFromCollection(collect($this->getData()), "updated_at");
 
         $this->assertSame(
             expected: [0, 0, 0, 0, 0, 2, 0, 0],

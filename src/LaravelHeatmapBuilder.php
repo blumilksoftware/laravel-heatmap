@@ -9,6 +9,7 @@ use Blumilk\Heatmap\Contracts\TimeGroupable;
 use Blumilk\Heatmap\HeatmapBuilder;
 use Blumilk\Heatmap\PeriodInterval;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
@@ -28,6 +29,21 @@ class LaravelHeatmapBuilder extends HeatmapBuilder
         $collection = collect($data);
 
         return parent::build($collection);
+    }
+
+    public function buildFromQuery(Builder $query, string $arrayAccessIndex = self::DEFAULT_ARRAY_ACCESS_INDEX): array
+    {
+        if (!is_a($query, Builder::class)) {
+            throw new InvalidArgumentException("The provided query is not a valid Eloquent Builder instance.");
+        }
+
+        $this->arrayAccessIndex = $arrayAccessIndex;
+
+        $results = $query->get();
+
+        $collection = $results instanceof Collection ? $results : collect($results);
+
+        return $this->buildFromCollection($collection, $arrayAccessIndex);
     }
 
     /**

@@ -37,3 +37,12 @@ $data = [
 $heatmapBuilder = new LaravelHeatmapBuilder();
 $heatmap = $heatmapBuilder->buildFromArray($data, 'created_at');
 ```
+There is also option to build from query:
+```php
+use Blumilk\LaravelHeatmap\LaravelHeatmapBuilder;
+
+$query = YourModel::where('created_at', '>', '2022-11-01 00:00:00');
+
+$heatmapBuilder = new LaravelHeatmapBuilder();
+$heatmap = $heatmapBuilder->buildFromQuery($query, 'created_at');
+```

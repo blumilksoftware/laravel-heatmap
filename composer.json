@@ -1,45 +1,64 @@
 {
-  "name": "blumilksoftware/laravel-heatmap",
-  "description": "Heatmap library for Laravel",
-  "type": "library",
-  "require": {
-    "php": "^8.2",
-    "nesbot/carbon": "^3.5",
-    "illuminate/support": "^11.11",
-    "illuminate/database": "^11.12",
-    "blumilksoftware/heatmap": "0.0.2"
-  },
-  "require-dev": {
-    "blumilksoftware/codestyle": "^3.2",
-    "phpunit/phpunit": "^11.2"
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "sort-packages": true
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Blumilk\\LaravelHeatmap\\LaravelHeatmapServiceProvider"
-      ]
-    }
-  },
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "Blumilk\\LaravelHeatmap\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Blumilk\\LaravelHeatmap\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-    "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
-    "test": "./vendor/bin/phpunit tests --colors always"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "blumilksoftware/laravel-heatmap",
+    "description": "Heatmap library for Laravel",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "nesbot/carbon": "^3.5",
+        "illuminate/support": "^11.11",
+        "illuminate/database": "^11.12",
+        "blumilksoftware/heatmap": "0.0.2"
+    },
+    "require-dev": {
+        "blumilksoftware/codestyle": "^3.2",
+        "orchestra/testbench": "^9.1",
+        "phpunit/phpunit": "^11.2"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Blumilk\\LaravelHeatmap\\LaravelHeatmapServiceProvider"
+            ]
+        }
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Blumilk\\LaravelHeatmap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Blumilk\\LaravelHeatmap\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "scripts": {
+        "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+        "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
+        "test": "./vendor/bin/phpunit tests --colors always",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

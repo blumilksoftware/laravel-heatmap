@@ -15,6 +15,9 @@ on:
       - 'composer.lock'
       - 'phpunit.xml'
 
+permissions:
+  contents: read
+
 jobs:
   test-and-lint-php:
     name: Test & lint PHP stuff
